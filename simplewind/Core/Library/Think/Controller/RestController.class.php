@@ -200,6 +200,11 @@ class RestController extends Controller {
             $data = serialize($data);
         }// 默认直接输出
         $this->setContentType($type);
+        header('Access-Control-Allow-Origin:*');
+        header("Access-Control-Allow-Methods:POST, GET, PUT, DELETE");
+        header("Access-Control-Allow-Headers:accept, origin, x-request-with");
+        header("Access-Control-Max-Age:1800");
+        header("Access-Control-Allow-Credentials:true");
         //header('Content-Length: ' . strlen($data));
         return $data;
     }
