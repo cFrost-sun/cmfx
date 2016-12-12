@@ -5,7 +5,7 @@
 		<ul class="nav nav-tabs">
 			<li><a href="{:U('slide/index')}">{:L('ADMIN_SLIDE_INDEX')}</a></li>
 			<li><a href="{:U('slide/add')}">{:L('ADMIN_SLIDE_ADD')}</a></li>
-			<li class="active"><a>编辑幻灯片</a></li>
+			<li class="active"><a>编辑图片</a></li>
 		</ul>
 		<form action="{:U('slide/edit_post')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
 			<div class="row-fluid">
@@ -24,9 +24,9 @@
 							</td>
 						</tr>
 						<tr>
-							<th width="80">幻灯片名称</th>
+							<th width="80">图片名称</th>
 							<td>
-								<input type="text" style="width: 400px;" name="slide_name" value="{$slide_name}" placeholder="请输入幻灯片名称"/>
+								<input type="text" style="width: 400px;" name="slide_name" value="{$slide_name}" placeholder="请输入图片名称"/>
 								<span class="form-required">*</span>
 								<input type="hidden" name="slide_id" value="{$slide_id}"/>
 							</td>
@@ -40,7 +40,7 @@
 							<td><input type="text" name="slide_des" value="{$slide_des}" style="width: 400px"></td>
 						</tr>
 						<tr>
-							<th width="80">幻灯片内容</th>
+							<th width="80">图片内容</th>
 							<td><textarea name="slide_content" id="description" style="width: 98%; height: 200px;">{$slide_content}</textarea></td>
 						</tr>
 					</table>
@@ -48,7 +48,7 @@
 				<div class="span3">
 					<table class="table table-bordered">
 						<tr>
-							<td><b>缩略图</b></td>
+							<td><b>图片预览(点击预览图更换图片)</b></td>
 						</tr>
 						<tr>
 							<td>

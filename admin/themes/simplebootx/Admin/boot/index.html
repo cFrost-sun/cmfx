@@ -20,7 +20,9 @@
 <link href="__PUBLIC__/js/artDialog/skins/default.css" rel="stylesheet" />
 <!--[if lte IE 8]>
 	<link rel="stylesheet" href="__PUBLIC__/simpleboot/css/simplebootadminindex-ie.css?" />
+
 <![endif]-->
+<link href="__TMPL__Admin/resources/css/custom/index.css" rel="stylesheet">
 <style>
 .navbar .nav_shortcuts .btn{margin-top: 5px;}
 .macro-component-tabitem{width:101px;}
@@ -152,9 +154,9 @@ right: initial !important;}
 	</div>
 	<div class="navbar">
 		<div class="navbar-inner">
-			<div class="container-fluid">
-				<a href="{:U('admin/index/index')}" class="brand"> <small> 
-					ThinkCMF{:L('ADMIN_CENTER')}
+			<div class="container-fluid sjz-header">
+				<a href="{:U('admin/index/index')}" class="brand"> <small>
+					<img src="__TMPL__Admin/resources/brand.png"> {:L('ADMIN_CENTER')}
 				</small>
 				</a>
 				<div class="pull-left nav_shortcuts" >

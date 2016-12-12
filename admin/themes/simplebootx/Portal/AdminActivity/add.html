@@ -17,35 +17,20 @@
 <body>
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
-			<li><a href="{:U('AdminPost/index')}">{:L('PORTAL_ADMINPOST_INDEX')}</a></li>
-			<li class="active"><a href="{:U('AdminPost/add',array('term'=>empty($term['term_id'])?'':$term['term_id']))}" target="_self">{:L('PORTAL_ADMINPOST_ADD')}</a></li>
+			<li><a href="{:U('AdminActivity/index')}">{:L('PORTAL_ADMINACTIVITY_INDEX')}</a></li>
+			<li class="active"><a href="{:U('AdminActivity/add',array('term'=>empty($term['term_id'])?'':$term['term_id']))}" target="_self">{:L('PORTAL_ADMINACTIVITY_ADD')}</a></li>
 		</ul>
-		<form action="{:U('AdminPost/add_post')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
+		<form action="{:U('AdminActivity/add_post')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
 			<div class="row-fluid">
 				<div class="span9">
 					<table class="table table-bordered">
 						<tr>
-							<th width="80">分类</th>
+							<th width="80">标题</th>
 							<td>
-								<select name="term[]">{$taxonomys}</select>
-								<!--<select multiple="multiple" style="max-height: 100px;" name="term[]">{$taxonomys}</select>-->
-								<div>windows：按住 Ctrl 按钮来选择多个选项,Mac：按住 command 按钮来选择多个选项</div>
-							</td>
-						</tr>
-						<tr>
-							<th>标题</th>
-							<td>
+								<input type="hidden" value="3" name="term[]">
 								<input type="text" style="width:400px;" name="post[post_title]" id="title" required value="" placeholder="请输入标题"/>
 								<span class="form-required">*</span>
 							</td>
-						</tr>
-						<tr>
-							<th>关键词</th>
-							<td><input type="text" name="post[post_keywords]" id="keywords" value="" style="width: 400px" placeholder="请输入关键字"> 多关键词之间用空格或者英文逗号隔开</td>
-						</tr>
-						<tr>
-							<th>文章来源</th>
-							<td><input type="text" name="post[post_source]" id="source" value="" style="width: 400px" placeholder="请输入文章来源"></td>
 						</tr>
 						<tr>
 							<th>摘要</th>
@@ -56,7 +41,7 @@
 						<tr>
 							<th>内容</th>
 							<td>
-								<script type="text/plain" id="content" name="post[post_content]"></script>
+								<script style="height:300px" type="text/plain" id="content" name="post[post_content]"></script>
 							</td>
 						</tr>
 						<tr>
@@ -133,7 +118,7 @@
 			</div>
 			<div class="form-actions">
 				<button class="btn btn-primary js-ajax-submit" type="submit">提交</button>
-				<a class="btn" href="{:U('AdminPost/index')}">返回</a>
+				<a class="btn" href="{:U('AdminActivity/index')}">返回</a>
 			</div>
 		</form>
 	</div>
@@ -282,7 +267,7 @@
 											}, {
 												name : '返回列表页',
 												callback : function() {
-													location = "{:U('AdminPost/index')}";
+													location = "{:U('AdminActivity/index')}";
 													return true;
 												}
 											} ]
