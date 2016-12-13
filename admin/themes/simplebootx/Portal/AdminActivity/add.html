@@ -28,6 +28,8 @@
 							<th width="80">标题</th>
 							<td>
 								<input type="hidden" value="3" name="term[]">
+								<input type="hidden" value="1" name="post[post_class]">
+								<input type="hidden" name="post[post_keywords]" id="keywords" value="设计周 活动">
 								<input type="text" style="width:400px;" name="post[post_title]" id="title" required value="" placeholder="请输入标题"/>
 								<span class="form-required">*</span>
 							</td>
@@ -88,31 +90,15 @@
 							<td>
 								<label class="radio"><input type="radio" name="post[istop]" value="1">置顶</label>
 								<label class="radio"><input type="radio" name="post[istop]" value="0" checked>未置顶</label>
+								<input type="hidden" name="post[recommended]" value="0">
 							</td>
 						</tr>
-						<tr>
-							<td>
-								<label class="radio"><input type="radio" name="post[recommended]" value="1">推荐</label>
-								<label class="radio"><input type="radio" name="post[recommended]" value="0" checked>未推荐</label>
-							</td>
-						</tr>
-						<tr>
-							<th>文章模板</th>
-						</tr>
-						<tr>
-							<td>
-								<php>
-									$tpl_list=sp_admin_get_tpl_file_list();
-									unset($tpl_list['page']);
-								</php>
-								<select style="min-width: 190px;" name="smeta[template]">
-									<option value="">请选择模板</option>
-									<foreach name="tpl_list" item="vo">
-										<option value="{$vo}">{$vo}{:C("TMPL_TEMPLATE_SUFFIX")}</option>
-									</foreach>
-								</select>
-							</td>
-						</tr>
+						<!--<tr>-->
+							<!--<td>-->
+								<!--<label class="radio"><input type="radio" name="post[recommended]" value="1">首页大图显示</label>-->
+								<!--<label class="radio"><input type="radio" name="post[recommended]" value="0" checked>关闭首页大图显示</label>-->
+							<!--</td>-->
+						<!--</tr>-->
 					</table>
 				</div>
 			</div>

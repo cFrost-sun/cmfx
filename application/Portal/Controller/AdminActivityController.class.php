@@ -152,7 +152,21 @@ class AdminActivityController extends AdminbaseController {
 			$term=$this->terms_model->where(array('term_id'=>$term_id))->find();
 			$this->assign("term",$term);
 		}
-		
+
+        $recommended=I('request.recommended');
+        if(!empty($recommended)){
+            $where['recommended']=array(
+                array('eq',$recommended)
+            );
+        }
+
+        $post_class=I('request.post_class');
+        if(!empty($post_class)){
+            $where['post_class']=array(
+                array('eq',$post_class)
+            );
+        }
+
 		$start_time=I('request.start_time');
 		if(!empty($start_time)){
 		    $where['post_date']=array(
@@ -322,8 +336,9 @@ class AdminActivityController extends AdminbaseController {
 	public function recommend(){
 		if(isset($_POST['ids']) && $_GET["recommend"]){
 			$ids = I('post.ids/a');
-			
-			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('recommended'=>1))!==false) {
+
+            $this->posts_model->where(array('id'=>array('not in',$ids[0])))->save(array('recommended'=>0));
+			if ( $this->posts_model->where(array('id'=>array('in',$ids[0])))->save(array('recommended'=>1))!==false) {
 				$this->success("推荐成功！");
 			} else {
 				$this->error("推荐失败！");
@@ -331,7 +346,7 @@ class AdminActivityController extends AdminbaseController {
 		}
 		if(isset($_POST['ids']) && $_GET["unrecommend"]){
 		    $ids = I('post.ids/a');
-		    
+
 			if ( $this->posts_model->where(array('id'=>array('in',$ids)))->save(array('recommended'=>0))!==false) {
 				$this->success("取消推荐成功！");
 			} else {

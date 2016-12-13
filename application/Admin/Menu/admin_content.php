@@ -4,25 +4,37 @@ return array (
   'model' => 'Content',
   'action' => 'default',
   'data' => '',
-  'type' => '0',
+  'type' => '1',
   'status' => '1',
   'name' => '内容管理',
-  'icon' => 'th',
+  'icon' => 'newspaper-o',
   'remark' => '',
-  'listorder' => '30',
+  'listorder' => '2',
   'children' => 
   array (
+    array (
+      'app' => 'Portal',
+      'model' => 'AdminActivity',
+      'action' => 'index',
+      'data' => 'term=3&amp;post_class=1',
+      'type' => '1',
+      'status' => '1',
+      'name' => '活动管理',
+      'icon' => '',
+      'remark' => '',
+      'listorder' => '0',
+    ),
     array (
       'app' => 'Api',
       'model' => 'Guestbookadmin',
       'action' => 'index',
       'data' => '',
       'type' => '1',
-      'status' => '1',
+      'status' => '0',
       'name' => '所有留言',
       'icon' => '',
       'remark' => '',
-      'listorder' => '0',
+      'listorder' => '11',
       'children' => 
       array (
         array (
@@ -45,11 +57,11 @@ return array (
       'action' => 'index',
       'data' => '',
       'type' => '1',
-      'status' => '1',
+      'status' => '0',
       'name' => '评论管理',
       'icon' => '',
       'remark' => '',
-      'listorder' => '0',
+      'listorder' => '11',
       'children' => 
       array (
         array (
@@ -88,7 +100,7 @@ return array (
       'name' => '文章管理',
       'icon' => '',
       'remark' => '',
-      'listorder' => '1',
+      'listorder' => '12',
       'children' => 
       array (
         array (
@@ -123,6 +135,18 @@ return array (
           'type' => '1',
           'status' => '0',
           'name' => '文章推荐',
+          'icon' => '',
+          'remark' => '',
+          'listorder' => '0',
+        ),
+        array (
+          'app' => 'Portal',
+          'model' => 'AdminPost',
+          'action' => 'copy',
+          'data' => '',
+          'type' => '1',
+          'status' => '0',
+          'name' => '文章批量复制',
           'icon' => '',
           'remark' => '',
           'listorder' => '0',
@@ -229,7 +253,7 @@ return array (
       'name' => '分类管理',
       'icon' => '',
       'remark' => '',
-      'listorder' => '2',
+      'listorder' => '13',
       'children' => 
       array (
         array (
@@ -318,11 +342,11 @@ return array (
       'action' => 'index',
       'data' => '',
       'type' => '1',
-      'status' => '1',
+      'status' => '0',
       'name' => '页面管理',
       'icon' => '',
       'remark' => '',
-      'listorder' => '3',
+      'listorder' => '14',
       'children' => 
       array (
         array (
@@ -415,7 +439,7 @@ return array (
       'name' => '回收站',
       'icon' => '',
       'remark' => '',
-      'listorder' => '4',
+      'listorder' => '14',
       'children' => 
       array (
         array (

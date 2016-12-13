@@ -29,6 +29,8 @@
 							<th width="80">标题</th>
 							<td>
 								<input type="hidden" value="3" name="term[]">
+								<input type="hidden" value="1" name="post[post_class]">
+								<input type="hidden" name="post[post_keywords]" id="keywords" value="设计周 活动">
 								<input type="hidden" name="post[id]" value="{$post.id}">
 								<input type="text" style="width: 400px;" name="post[post_title]" required value="{$post.post_title}" placeholder="请输入标题"/>
 								<span class="form-required">*</span>
@@ -95,13 +97,6 @@
 							<td><input type="text" name="post[post_date]" value="{$post.post_date}" class="js-datetime" style="width: 160px;"></td>
 						</tr>
 						<tr>
-							<th>评论</th>
-						</tr>
-						<tr>
-							<td><label style="width: 88px"><a href="javascript:open_iframe_dialog('{:U('comment/commentadmin/index',array('post_id'=>$post['id']))}','评论列表')">查看评论</a></label>
-							</td>
-						</tr>
-						<tr>
 							<th>状态</th>
 						</tr>
 						<tr>
@@ -122,32 +117,16 @@
 							<td>
 								<label class="radio"><input type="radio" name="post[istop]" value="1" {$istop_yes}>置顶</label>
 								<label class="radio"><input type="radio" name="post[istop]" value="0" {$istop_no}>未置顶</label>
+								<input type="hidden" name="post[recommended]" value="{$post['recommended']}">
 							</td>
 						</tr>
-						<tr>
-							<td>
-								<label class="radio"><input type="radio" name="post[recommended]" value="1" {$recommended_yes}>推荐</label>
-								<label class="radio"><input type="radio" name="post[recommended]" value="0" {$recommended_no}>未推荐</label>
-							</td>
-						</tr>
-						<tr>
-							<th>文章模板</th>
-						</tr>
-						<tr>
-							<td>
-								<php>
-									$tpl_list=sp_admin_get_tpl_file_list();
-									unset($tpl_list['page']);
-								</php>
-								<select style="min-width: 190px;" name="smeta[template]">
-									<option value="">请选择模板</option>
-									<foreach name="tpl_list" item="vo">
-										<php>$template_selected=$smeta['template']==$vo?"selected":"";</php>
-										<option value="{$vo}"{$template_selected}>{$vo}{:C("TMPL_TEMPLATE_SUFFIX")}</option>
-									</foreach>
-								</select>
-							</td>
-						</tr>
+						<!--<tr>-->
+						<!--<td>-->
+						<!--<label class="radio"><input type="radio" name="post[recommended]" value="1">首页大图显示</label>-->
+						<!--<label class="radio"><input type="radio" name="post[recommended]" value="0" checked>关闭首页大图显示</label>-->
+						<!--</td>-->
+						<!--</tr>-->
+
 					</table>
 				</div>
 			</div>
