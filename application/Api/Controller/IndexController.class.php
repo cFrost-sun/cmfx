@@ -31,11 +31,11 @@ class IndexController extends RestController {
             case 'get': // get请求处理代码
 
                 $count = $this->posts_model
-                    ->where('post_class = 1 and post_status = 1')
+                    ->where('post_class = 3 and post_status = 1')
                     ->count();
                 $posts = $this->posts_model
                     ->field('id,post_date,post_content,post_title,post_excerpt,istop,recommended,smeta')
-                    ->where('post_class = 1 and post_status = 1')
+                    ->where('post_class = 3 and post_status = 1')
 //                    ->join('dn_term_relationships ON dn_term_relationships.object_id = dn_posts.id')
 //                    ->join('dn_terms ON dn_terms.term_id = dn_term_relationships.term_id')
 //                    ->where('dn_terms.term_id = 3')

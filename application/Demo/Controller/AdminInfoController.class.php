@@ -6,11 +6,11 @@
 // +----------------------------------------------------------------------
 // | Author: Tuolaji <479923197@qq.com>
 // +----------------------------------------------------------------------
-namespace Portal\Controller;
+namespace Demo\Controller;
 
 use Common\Controller\AdminbaseController;
 
-class AdminActivityController extends AdminbaseController {
+class AdminInfoController extends AdminbaseController {
     
 	protected $posts_model;
 	protected $term_relationships_model;
@@ -18,9 +18,9 @@ class AdminActivityController extends AdminbaseController {
 	
 	function _initialize() {
 		parent::_initialize();
-		$this->posts_model = D("Portal/Posts");
-		$this->terms_model = D("Portal/Terms");
-		$this->term_relationships_model = D("Portal/TermRelationships");
+		$this->posts_model = D("Demo/Posts");
+		$this->terms_model = D("Demo/Terms");
+		$this->term_relationships_model = D("Demo/TermRelationships");
 	}
 	
 	// 后台文章管理列表

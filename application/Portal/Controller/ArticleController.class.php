@@ -15,9 +15,9 @@ class ArticleController extends HomebaseController {
     public function index() {
     	$article_id=I('get.id',0,'intval');
     	$term_id=I('get.cid',0,'intval');
-    	
+
     	$posts_model=M("Posts");
-    	
+
     	$article=$posts_model
     	->alias("a")
     	->field('a.*,c.user_login,c.user_nicename,b.term_id')
@@ -25,73 +25,73 @@ class ArticleController extends HomebaseController {
 		->join("__USERS__ c ON a.post_author = c.id")
 		->where(array('a.id'=>$article_id,'b.term_id'=>$term_id))
 		->find();
-    	
+
     	if(empty($article)){
     	    header('HTTP/1.1 404 Not Found');
     	    header('Status:404 Not Found');
     	    if(sp_template_file_exists(MODULE_NAME."/404")){
     	        $this->display(":404");
     	    }
-    	    
+
     	    return;
     	}
-    	
+
     	$terms_model= M("Terms");
     	$term=$terms_model->where(array('term_id'=>$term_id))->find();
-    	
+
     	$posts_model->where(array('id'=>$article_id))->setInc('post_hits');
-    	
+
     	$article_date=$article['post_date'];
-    	
+
     	$join = '__POSTS__ as b on a.object_id =b.id';
     	$join2= '__USERS__ as c on b.post_author = c.id';
-    	
+
     	$term_relationships_model= M("TermRelationships");
-    	
+
     	$next=$term_relationships_model
     	->alias("a")
     	->join($join)->join($join2)
     	->where(array('b.id'=>array('gt',$article_id),"post_date"=>array("egt",$article_date),"a.status"=>1,'a.term_id'=>$term_id,'post_status'=>1))
     	->order("post_date asc,b.id asc")
     	->find();
-    	
+
     	$prev=$term_relationships_model
     	->alias("a")
     	->join($join)->join($join2)
     	->where(array('b.id'=>array('lt',$article_id),"post_date"=>array("elt",$article_date),"a.status"=>1,'a.term_id'=>$term_id,'post_status'=>1))
     	->order("post_date desc,b.id desc")
     	->find();
-    	
+
     	$this->assign("next",$next);
     	$this->assign("prev",$prev);
-    	
+
     	$smeta=json_decode($article['smeta'],true);
     	$content_data=sp_content_page($article['post_content']);
     	$article['post_content']=$content_data['content'];
-    	
+
     	$this->assign("page",$content_data['page']);
     	$this->assign($article);
     	$this->assign("smeta",$smeta);
     	$this->assign("term",$term);
     	$this->assign("article_id",$article_id);
-    	
+
     	$tplname=$term["one_tpl"];
     	$tplname=empty($smeta['template'])?$tplname:$smeta['template'];
     	$tplname=sp_get_apphome_tpl($tplname, "article");
-    	
+
     	$this->display(":$tplname");
     }
-    
+
     // 文章点赞
     public function do_like(){
     	$this->check_login();
-    	
+
     	$id = I('get.id',0,'intval');//posts表中id
-    	
+
     	$posts_model=M("Posts");
-    	
+
     	$can_like=sp_check_user_action("posts$id",1);
-    	
+
     	if($can_like){
     		$posts_model->save(array("id"=>$id,"post_like"=>array("exp","post_like+1")));
     		$this->success("赞好啦！");
@@ -99,14 +99,14 @@ class ArticleController extends HomebaseController {
     		$this->error("您已赞过啦！");
     	}
     }
-    
+
     // 前台用户添加文章
     public function add(){
         $this->check_login();
         $this->_getTermTree();
         $this->display();
     }
-    
+
     // 前台用户添加文章提交
     public function add_post(){
         if(IS_POST){
@@ -117,9 +117,9 @@ class ArticleController extends HomebaseController {
             }
             $posts_model=M('Posts');
             $term_relationships_model=M('TermRelationships');
-            
+
             $_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
-            
+
             $_POST['post']['post_date']=date("Y-m-d H:i:s",time());
             $_POST['post']['post_modified']=date("Y-m-d H:i:s",time());
             $_POST['post']['post_author']=sp_get_current_userid();
@@ -136,26 +136,26 @@ class ArticleController extends HomebaseController {
                         $posts_model->delete($result);
                         $this->error("文章添加失败！");
                     }
-                
+
                 } else {
                     $this->error("文章添加失败！");
                 }
             }else{
                 $this->error($posts_model->getError());
             }
-            
-            
+
+
         }
-    
+
     }
-    
+
     // 前台用户文章编辑
     public function edit(){
         $this->check_login();
         $id=I("get.id",0,'intval');
         $terms_model=M('Terms');
         $posts_model=M('Posts');
-        
+
         $term_relationship = M('TermRelationships')->where(array("object_id"=>$id,"status"=>1))->getField("term_id",true);
         $this->_getTermTree();
         $post=$posts_model->where(array('id'=>$id,'post_author'=>sp_get_current_userid()))->find();
@@ -166,9 +166,9 @@ class ArticleController extends HomebaseController {
         }else{
             $this->error('您编辑的文章不存在！');
         }
-        
+
     }
-    
+
     // 前台用户文章编辑提交
     public function edit_post(){
         if(IS_POST){
@@ -176,7 +176,7 @@ class ArticleController extends HomebaseController {
 
             $posts_model=M('Posts');
             $term_relationships_model=M('TermRelationships');
-            
+
             $_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
             $_POST['post']['post_modified']=date("Y-m-d H:i:s",time());
             $article=I("post.post");
@@ -192,14 +192,14 @@ class ArticleController extends HomebaseController {
             }else{
                 $this->error($posts_model->getError());
             }
-            
+
         }
     }
-    
+
     // 获取文章分类树结构
     private function _getTermTree($term=array()){
         $result =M('Terms')->order(array("listorder"=>"asc"))->select();
-    
+
         $tree = new \Tree();
         $tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
         $tree->nbsp = '&nbsp;&nbsp;&nbsp;';
@@ -213,7 +213,7 @@ class ArticleController extends HomebaseController {
             $r['checked'] =in_array($r['term_id'], $term)?"checked":"";
             $array[] = $r;
         }
-    
+
         $tree->init($array);
         $str="<option value='\$id' \$selected>\$spacer\$name</option>";
         $terms = $tree->get_tree(0, $str);

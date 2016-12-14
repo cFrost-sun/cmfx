@@ -17,8 +17,8 @@
 <body>
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
-			<li><a href="{:U('AdminActivity/index')}">{:L('PORTAL_ADMINACTIVITY_INDEX')}</a></li>
-			<li class="active"><a href="{:U('AdminActivity/add',array('term'=>empty($term['term_id'])?'':$term['term_id']))}" target="_self">{:L('PORTAL_ADMINACTIVITY_ADD')}</a></li>
+			<li><a href="{:U('AdminActivity/index',array('term'=>3))}">{:L('PORTAL_ADMINACTIVITY_INDEX')}</a></li>
+			<li class="active"><a href="{:U('AdminActivity/add')}" target="_self">{:L('PORTAL_ADMINACTIVITY_ADD')}</a></li>
 		</ul>
 		<form action="{:U('AdminActivity/add_post')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
 			<div class="row-fluid">
@@ -28,7 +28,7 @@
 							<th width="80">标题</th>
 							<td>
 								<input type="hidden" value="3" name="term[]">
-								<input type="hidden" value="1" name="post[post_class]">
+								<input type="hidden" value="3" name="post[post_class]">
 								<input type="hidden" name="post[post_keywords]" id="keywords" value="设计周 活动">
 								<input type="text" style="width:400px;" name="post[post_title]" id="title" required value="" placeholder="请输入标题"/>
 								<span class="form-required">*</span>
@@ -104,7 +104,7 @@
 			</div>
 			<div class="form-actions">
 				<button class="btn btn-primary js-ajax-submit" type="submit">提交</button>
-				<a class="btn" href="{:U('AdminActivity/index')}">返回</a>
+				<a class="btn" href="{:U('AdminActivity/index',array('term'=>3))}">返回</a>
 			</div>
 		</form>
 	</div>
@@ -253,7 +253,7 @@
 											}, {
 												name : '返回列表页',
 												callback : function() {
-													location = "{:U('AdminActivity/index')}";
+													location = "{:U('AdminActivity/index',array('term'=>3))}";
 													return true;
 												}
 											} ]
